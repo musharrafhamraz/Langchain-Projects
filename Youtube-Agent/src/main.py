@@ -8,9 +8,9 @@ from dotenv import load_dotenv
 
 # Temporary debug
 load_dotenv()  # Load .env file
-print("GROQ_API_KEY exists:", "GROQ_API_KEY" in os.environ)
-print("Current working directory:", os.getcwd())
-print("Files in directory:", os.listdir('.'))
+# print("GROQ_API_KEY exists:", "GROQ_API_KEY" in os.environ)
+# print("Current working directory:", os.getcwd())
+# print("Files in directory:", os.listdir('.'))
 
 def main():
     st.title("YouTube Transcript Q&A System")
