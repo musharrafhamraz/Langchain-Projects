@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Home - eCommerce Store{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Featured Products</h1>
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for product in products %}
+    <div class="col">
+        <div class="card product-card">
+            <img src="{{ url_for('static', filename='images/' + product.image) }}" 
+                 class="card-img-top product-image" 
+                 alt="{{ product.title }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.title }}</h5>
+                <p class="card-text">{{ product.short_description }}</p>
+                <p class="card-text"><strong>${{ "%.2f"|format(product.price) }}</strong></p>
+                <a href="{{ url_for('item_details', item_id=product.id) }}" 
+                   class="btn btn-primary">View Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Pagination -->
+{% if total_pages > 1 %}
+<nav aria-label="Page navigation" class="mt-4">
+    <ul class="pagination justify-content-center">
+        {% if current_page > 1 %}
+        <li class="page-item">
+            <a class="page-link" href="{{ url_for('home', page=current_page-1) }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        {% endif %}
+        
+        {% for page in range(1, total_pages + 1) %}
+        <li class="page-item {% if page == current_page %}active{% endif %}">
+            <a class="page-link" href="{{ url_for('home', page=page) }}">{{ page }}</a>
+        </li>
+        {% endfor %}
+        
+        {% if current_page < total_pages %}
+        <li class="page-item">
+            <a class="page-link" href="{{ url_for('home', page=current_page+1) }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+{% endblock %}
