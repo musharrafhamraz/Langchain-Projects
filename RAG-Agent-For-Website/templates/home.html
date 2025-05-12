@@ -51,4 +51,81 @@
     </ul>
 </nav>
 {% endif %}
+<!-- Chatbot -->
+<div id="chatbot-container">
+    <div id="chatbot-header">Ask a Question</div>
+    <div id="chatbot-body">
+        <input type="text" id="queryInput" placeholder="Ask about a product..." />
+        <button onclick="askQuestion()">Ask</button>
+        <p id="answer"></p>
+    </div>
+</div>
+
+<style>
+#chatbot-container {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 300px;
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    padding: 15px;
+    z-index: 1000;
+}
+
+#chatbot-header {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+#chatbot-body input[type="text"] {
+    width: calc(100% - 50px);
+    padding: 6px;
+    margin-bottom: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#chatbot-body button {
+    padding: 6px 10px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#chatbot-body button:hover {
+    background-color: #0056b3;
+}
+
+#answer {
+    margin-top: 10px;
+    font-style: italic;
+    color: #444;
+}
+</style>
+
+<script>
+function askQuestion() {
+    const question = document.getElementById('queryInput').value;
+    fetch('/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question: question })
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('answer').innerText = data.answer;
+    })
+    .catch(error => {
+        document.getElementById('answer').innerText = 'Error: ' + error.message;
+    });
+}
+</script>
+
 {% endblock %}
