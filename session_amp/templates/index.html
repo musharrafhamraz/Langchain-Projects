@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Session Amplifier</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>🧠 Session Amplifier</h1>
+    <p class="tagline">Reflect deeply between therapy sessions</p>
+
+    <form method="POST">
+      <label for="transcript">Paste your session transcript:</label>
+      <textarea id="transcript" name="transcript" rows="12" placeholder="E.g. I told my therapist that I felt overwhelmed...">{{ transcript or '' }}</textarea>
+      <button type="submit">Generate Reflection</button>
+    </form>
+
+    {% if summary %}
+      <div class="result-card">
+        <h2>✨ Emotionally Attuned Summary</h2>
+        <p>{{ summary }}</p>
+      </div>
+    {% elif error %}
+      <p class="error">{{ error }}</p>
+    {% endif %}
+  </div>
+</body>
+</html>
