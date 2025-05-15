@@ -1,0 +1,8 @@
+flask
+pandas
+werkzeug
+langchain
+langchain_core
+langchain_community
+sentence-transformers
+langchain-huggingface
