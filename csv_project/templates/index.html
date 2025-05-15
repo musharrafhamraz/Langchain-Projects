@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with Your CSV</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <div class="container">
+        <!-- Landing Page -->
+        <div id="landing-page" class="animate__animated animate__fadeIn">
+            <h1 class="animate__animated animate__fadeInDown">Chat with Your CSV</h1>
+            <p class="tagline animate__animated animate__fadeIn animate__delay-1s">
+                Upload a CSV. Ask anything. Get instant insights & charts.
+            </p>
+            <div class="upload-container animate__animated animate__fadeInUp animate__delay-1s">
+                <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
+                    <input type="file" id="csv-file" name="file" accept=".csv" hidden>
+                    <button type="button" id="upload-btn" class="cta-button" onclick="document.getElementById('csv-file').click();">
+    Upload CSV and Start Chatting
+</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Analytics Page (Hidden initially) -->
+        <div id="analytics-page" class="hidden">
+    <div class="analytics-container">
+        <!-- Right Panel -->
+        <div class="right-panel">
+            <!-- <div class="file-header">
+                <h2>Chat With CSV</h2>
+                <div id="chart-container"></div>  
+            </div> -->
+            
+            <div class="chat-container">
+                <div id="chat-messages"></div>
+                <div class="chat-input-container">
+                    <input type="text" id="chat-input" placeholder="Ask about your data...">
+                    <button id="send-btn">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <!-- Loading Screen -->
+        <div id="loading-screen" class="hidden">
+            <div class="loader"></div>
+            <p>Processing your CSV...</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html> 
